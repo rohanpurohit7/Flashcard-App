@@ -1,41 +1,50 @@
 # Architecture
 
-## Runtime Structure
+## Application Structure
 
 ```mermaid
 flowchart TD
-    Browser[Browser] --> React[React App]
-    React --> API[flashcardApi]
-    API --> Seed[Seed Deck Data]
-    React --> DeckSelector[Deck Selector]
-    React --> Flashcard[Flashcard Component]
-    React --> Progress[Progress Panel]
+    Browser[Browser] --> App[Interview Command Center]
+    App --> Packet[Company / Role Packet]
+    App --> Webcam[Local Webcam Preview]
+    App --> SmartCards[Smart Flashcards]
+    App --> Rooms[Conference Room Chat]
+    App --> Coach[Interview Coach Chat]
+    App --> Games[Logic Games]
+    SmartCards --> Content[Seeded Interview Content]
+    Coach --> Boundary[Secure Backend Endpoint]
+    Boundary --> OpenAI[OpenAI Chat Agent]
 ```
+
+## Security Model
+
+- Webcam video is local to the browser and is not uploaded by this app.
+- OpenAI keys must never be placed in client-side code.
+- The browser calls `VITE_INTERVIEW_COACH_ENDPOINT` only when configured.
+- A backend should validate input, authenticate users if needed, rate-limit requests, and call OpenAI server-side.
 
 ## Module Responsibilities
 
 | Path | Responsibility |
 | --- | --- |
-| `src/main.jsx` | Application state, deck selection, review workflow, scoring |
-| `src/api/flashcardApi.js` | API boundary for seed data now and backend integration later |
-| `src/data/seedDecks.js` | Computer science and project management interview questions |
-| `src/components/DeckSelector.jsx` | Deck and difficulty controls |
-| `src/components/Flashcard.jsx` | Question/answer card rendering |
-| `src/components/ProgressPanel.jsx` | Session progress and scoring display |
-| `legacy/java` | Original Java Swing implementation retained for reference only |
+| `src/main.jsx` | Consolidated dashboard, state, webcam, room chat, coach chat, flashcards, logic games |
+| `src/data/interviewContent.js` | Company packet, seeded job description, rooms, games, credential flashcards |
+| `src/services/coachService.js` | Secure API-boundary client with local fallback |
+| `src/styles/app.css` | Responsive visual system |
+| `legacy/java` | Original Flashcard Java app retained for reference |
 
-## Review Workflow
+## Workflow
 
 ```mermaid
 flowchart LR
-    Select[Select Deck] --> Filter[Choose Difficulty]
-    Filter --> Question[Read Question]
-    Question --> Answer[Show Answer]
-    Answer --> Known[Mark Known]
-    Answer --> Review[Review Later]
-    Known --> Next[Next Card]
-    Review --> Next
-    Next --> Complete{Cards Left?}
-    Complete -->|Yes| Question
-    Complete -->|No| Summary[Session Summary]
+    Packet[Review Packet] --> Camera[Start Camera]
+    Camera --> Cards[Practice Smart Flashcards]
+    Cards --> Coach[Ask Interview Coach]
+    Coach --> Room[Practice Panel Room]
+    Room --> Logic[Run Logic Game]
+    Logic --> Packet
 ```
+
+## Credential Mapper
+
+The credential mapper is written around DoD 8140-era workforce qualification language while acknowledging legacy 8570 baseline certification familiarity. It is a study aid, not an official compliance determination.

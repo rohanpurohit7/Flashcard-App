@@ -7,8 +7,6 @@ npm install
 npm run dev
 ```
 
-Open the Vite URL shown in the terminal.
-
 ## Production Build
 
 ```powershell
@@ -16,11 +14,11 @@ npm run build
 npm run preview
 ```
 
-The deployable static artifact is `dist/`.
+The deployable artifact is `dist/`.
 
-## Static Hosting Targets
+## Static Web Deployment
 
-Use any static hosting platform:
+Deploy `dist/` to:
 
 - GitHub Pages
 - Netlify
@@ -28,14 +26,29 @@ Use any static hosting platform:
 - AWS S3 + CloudFront
 - Azure Static Web Apps
 
-## GitHub Pages Example
+## OpenAI Backend Deployment
+
+For the coach chat, deploy a small backend endpoint:
+
+```text
+POST /api/interview-coach
+```
+
+Responsibilities:
+
+- Store `OPENAI_API_KEY` only server-side.
+- Validate request body.
+- Rate-limit requests.
+- Call the OpenAI Responses or Chat Completions API.
+- Return `{ "reply": "..." }`.
+
+Then configure the frontend:
 
 ```powershell
+$env:VITE_INTERVIEW_COACH_ENDPOINT='https://your-domain.example/api/interview-coach'
 npm run build
 ```
 
-Publish the `dist/` directory through your preferred GitHub Pages workflow.
+## Camera Requirements
 
-## Backend API Upgrade Path
-
-`src/api/flashcardApi.js` is the only data access boundary. To move seed data to a real API, replace `getDecks()` with a fetch call and keep the React components unchanged.
+Browser camera access requires HTTPS in production, except for localhost development.

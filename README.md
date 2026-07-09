@@ -1,8 +1,17 @@
-# Flashcard Interview Prep
+# Interview Command Center
 
-A React flashcard study app for computer science and project management interview preparation.
+A consolidated React interview-preparation app combining the former Flashcard App and Chat Client ideas into one browser product.
 
-The original Java Swing implementation is retained under `legacy/java/` for reference only. The active app is a React/Vite single-page application.
+## Features
+
+- Smart interview flashcards for cybersecurity project management
+- DoD 8140 / legacy 8570-oriented credential mapper flashcards
+- Webcam preview for interview rehearsal
+- Conference-room style chat simulations
+- Interview coach chat with secure backend endpoint support
+- Logic games for risk triage and dependency thinking
+- Company mission, vision, values, seeded job description, and interview packet summary
+- Legacy Java Swing/socket sources retained under `legacy/java/`
 
 ## Quick Start
 
@@ -11,22 +20,29 @@ npm install
 npm run dev
 ```
 
-## Build
+Open the Vite URL shown in the terminal.
+
+## OpenAI Coach Integration
+
+The browser does not store API keys. To connect a real OpenAI chat agent, expose a backend endpoint and set:
 
 ```powershell
-npm run build
-npm run preview
+$env:VITE_INTERVIEW_COACH_ENDPOINT='https://your-domain.example/api/interview-coach'
 ```
 
-## Features
+The endpoint should accept:
 
-- Seeded computer science interview deck
-- Seeded project management interview deck
-- Category and difficulty filters
-- Flip-card review workflow
-- Known / review-later scoring
-- Study progress summary
-- Client-side API abstraction for future backend integration
+```json
+{ "message": "string", "context": { "role": "string", "deck": "string" } }
+```
+
+And return:
+
+```json
+{ "reply": "string" }
+```
+
+Without that endpoint, the app uses a local safe fallback coach.
 
 ## Documentation
 

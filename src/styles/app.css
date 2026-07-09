@@ -1,212 +1,221 @@
 :root {
-  color: #17202a;
-  background: #f3f6f8;
+  background: #f4f6f7;
+  color: #17212b;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
-button,
-select {
-  font: inherit;
-}
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, input, select { font: inherit; }
 
 .app-shell {
+  margin: 0 auto;
+  max-width: 1440px;
   min-height: 100vh;
-  padding: 28px;
+  padding: 24px;
 }
 
 .topbar {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin: 0 auto 24px;
-  max-width: 1120px;
+  margin-bottom: 20px;
 }
 
 .eyebrow {
   color: #52616f;
   font-size: 0.78rem;
-  font-weight: 700;
-  margin: 0 0 6px;
+  font-weight: 800;
+  margin: 0 0 4px;
   text-transform: uppercase;
 }
 
-h1,
-h2,
-p {
-  margin-top: 0;
+h1, h2, h3, p { margin-top: 0; }
+h1 { font-size: 2rem; margin-bottom: 0; }
+h2 { font-size: 1.05rem; margin-bottom: 0; }
+h3 { font-size: 0.96rem; margin-bottom: 8px; }
+
+.status-pill,
+.values span,
+.card-meta span {
+  align-items: center;
+  background: #e1edf0;
+  border-radius: 999px;
+  color: #21475a;
+  display: inline-flex;
+  font-size: 0.78rem;
+  font-weight: 800;
+  gap: 6px;
+  padding: 7px 10px;
 }
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 0;
-}
-
-.workspace {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: 320px minmax(0, 1fr);
-  margin: 0 auto;
-  max-width: 1120px;
-}
-
-.sidebar,
-.study-panel {
+.dashboard {
   display: grid;
   gap: 16px;
-}
-
-.panel,
-.flashcard,
-.complete-state {
-  background: #ffffff;
-  border: 1px solid #d9e1e7;
-  border-radius: 8px;
-  box-shadow: 0 10px 26px rgba(19, 37, 53, 0.08);
+  grid-template-columns: 1.2fr 0.8fr 1fr;
 }
 
 .panel {
+  background: #ffffff;
+  border: 1px solid #d9e1e7;
+  border-radius: 8px;
+  box-shadow: 0 10px 26px rgba(19, 37, 53, 0.07);
+  min-width: 0;
   padding: 18px;
+}
+
+.packet-panel { grid-column: span 2; }
+.coach-panel { grid-row: span 2; }
+
+.section-title {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.role {
+  color: #0b6b4f;
+  font-weight: 900;
+}
+
+.split {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.summary-list {
+  color: #33414d;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.camera-panel video {
+  aspect-ratio: 16 / 10;
+  background: #17212b;
+  border-radius: 8px;
+  display: block;
+  margin-bottom: 12px;
+  width: 100%;
 }
 
 label {
   color: #33414d;
   display: grid;
-  font-size: 0.9rem;
-  font-weight: 700;
-  gap: 8px;
-  margin-top: 14px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  gap: 6px;
+  margin-bottom: 12px;
 }
 
-select {
+select, input {
   border: 1px solid #bdc9d3;
   border-radius: 6px;
-  padding: 10px 12px;
+  min-height: 40px;
+  padding: 9px 10px;
+  width: 100%;
 }
 
-.flashcard {
-  min-height: 360px;
-  padding: 32px;
+.smart-card {
+  background: #f7fafb;
+  border: 1px solid #dce6eb;
+  border-radius: 8px;
+  min-height: 220px;
+  padding: 16px;
 }
 
 .card-meta {
   display: flex;
-  flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 
-.card-meta span {
-  background: #e8f1f5;
-  border-radius: 999px;
-  color: #2c5467;
-  font-size: 0.78rem;
-  font-weight: 700;
-  padding: 6px 10px;
-  text-transform: capitalize;
+.learning {
+  background: #edf7f2;
+  border-left: 4px solid #0b6b4f;
+  border-radius: 6px;
+  color: #214033;
+  margin-bottom: 0;
+  padding: 10px;
 }
 
-.flashcard h2 {
-  font-size: 1rem;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-.flashcard p {
-  font-size: clamp(1.35rem, 2vw, 2rem);
-  line-height: 1.4;
-}
-
-.actions {
+.actions,
+.input-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
 }
 
 .primary,
 .secondary,
-.icon-button {
+.icon-action {
   align-items: center;
   border: 0;
   border-radius: 6px;
   cursor: pointer;
   display: inline-flex;
-  font-weight: 800;
-  gap: 8px;
-  min-height: 42px;
-  padding: 10px 14px;
+  font-weight: 900;
+  justify-content: center;
+  min-height: 40px;
+  padding: 9px 12px;
 }
 
-.primary {
+.primary, .icon-action {
   background: #0b6b4f;
   color: #ffffff;
 }
 
-.secondary,
-.icon-button {
+.secondary {
   background: #dfe9ee;
-  color: #17202a;
+  color: #17212b;
 }
 
-.progress-track {
-  background: #e3e9ee;
-  border-radius: 999px;
-  height: 10px;
-  overflow: hidden;
-}
-
-.progress-track div {
-  background: #0b6b4f;
-  height: 100%;
-}
-
-.stats {
+.chat-window {
+  background: #f7fafb;
+  border: 1px solid #dce6eb;
+  border-radius: 8px;
   display: grid;
   gap: 10px;
-  margin: 16px 0 0;
+  max-height: 320px;
+  min-height: 240px;
+  overflow: auto;
+  padding: 12px;
 }
 
-.stats div {
-  display: flex;
-  justify-content: space-between;
+.bubble {
+  border-radius: 8px;
+  max-width: 88%;
+  padding: 10px;
 }
 
-.stats dt {
+.bubble p { margin-bottom: 0; }
+.bubble strong { display: block; font-size: 0.78rem; margin-bottom: 4px; text-transform: uppercase; }
+.bubble.local { align-self: end; background: #0b6b4f; color: #ffffff; }
+.bubble.remote { align-self: start; background: #ffffff; border: 1px solid #d0dce3; }
+
+.hint {
   color: #52616f;
+  font-size: 0.86rem;
+  margin: 8px 0 0;
 }
 
-.stats dd {
-  font-weight: 800;
-  margin: 0;
+@media (max-width: 1080px) {
+  .dashboard { grid-template-columns: 1fr 1fr; }
+  .packet-panel, .coach-panel { grid-column: span 2; }
 }
 
-.complete-state {
-  padding: 32px;
-}
-
-@media (max-width: 820px) {
-  .app-shell {
-    padding: 18px;
-  }
-
-  .workspace {
-    grid-template-columns: 1fr;
-  }
-
-  .actions {
-    justify-content: stretch;
-  }
-
-  .actions button {
-    justify-content: center;
-    width: 100%;
-  }
+@media (max-width: 760px) {
+  .app-shell { padding: 16px; }
+  .topbar { align-items: flex-start; flex-direction: column; gap: 12px; }
+  .dashboard, .split { grid-template-columns: 1fr; }
+  .packet-panel, .coach-panel { grid-column: auto; }
+  .actions { flex-direction: column; }
 }
